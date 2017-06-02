@@ -1,0 +1,12 @@
+[{
+  "modid": "bulkchat",
+  "name": "BulkChat",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://github.com/Gjum/BulkChat",
+  "authorList": ["Gjum"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}]
