@@ -1,0 +1,32 @@
+language: java
+jdk:
+- oraclejdk7
+install:
+- "./gradlew clean"
+script:
+- FORGE_VERSION=1.10.2-12.18.3.2254 ./gradlew reobf
+- FORGE_VERSION=1.11.2-13.20.0.2260 ./gradlew reobf
+branches:
+  only:
+  - master
+  - "/v\\d+\\..*/"
+before_cache:
+- rm -f $HOME/.gradle/caches/minecraft/de/oceanlabs/mcp/mcp_snapshot/*/.cache
+- rm -f $HOME/.gradle/caches/minecraft/McpMappings.json*
+- rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -rf $HOME/.gradle/caches/*/fileHashes/
+- rm -rf $HOME/.gradle/caches/minecraft/deobfedDeps/
+cache:
+  directories:
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
+deploy:
+  provider: releases
+  skip_cleanup: true
+  file: build/libs/*.jar
+  file_glob: true
+  prerelease: true
+  on:
+    tags: true
+  api_key:
+    secure: Llzf8BOhjSuVZFCRWUcNOPZyWERFBBUYO3NcrkJcvauurR3oRJV29PuWEbf3Xw0KFvF4qX1K4zJobQQ/8Al/DdU8Ahcz0kNfCsn2sF2muttWGN5LSZm+XlUfDXOY0VHnyitWy/73R3LygItCT9BIoyYbDPlX8WsaV5bYLLsntb1xzMbAJh+UxNtKXt8CugKWycBzislxjaruYR0MRSS4bgn56uYNMO//qVzzjUJQmyqg4N7Nnar28Hg/MiI3JkYkVtBksR2AR9lx8Xb1k5VpBvro9hE4lHG902GlxasXSqVdLXy+IM9Sa5CQSLJLufLXQkFmbDN+2d3XL7UwtnI8n98kdY0f/eDc6gDhcOy+wWfR/M7jD/JXHFiUVRdxIfMf45I9f0dFCZfvKrpPeQepUAG2KaZtjkxSSTpAK8NOAy9Pnt32fonvS1eV+Gz1R+ka906/JAuuKwBdGfrY2L+Q8VkHqQIX3VI964Qsx9uNlsv2ADE+HkxWCMBlJguMKvKINA8ryhqREAPS0bqtXUhogZbjH+GejTPbmRidZslZVD5YD9AF8t59J5fDTnwLKbqfdUY9znA0U3EWqr3EocvN4cIOejxJgZtIjj0GvPh6wEhkqJIgL/7cCBoOXmy+A6EgMMOyrmnWxDJk1raX1BHwOuzE+j9KqKHbN+MKHliLaWI=
